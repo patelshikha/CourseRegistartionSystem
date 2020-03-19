@@ -21,15 +21,15 @@ import Login from './components/Login';
 function App() {
 
   return (
-    <Router style={styles.mainView}>
-      <Navbar bg="#ff5e6c" expand="lg" style={styles.mainView}>
+    <Router>
+      <Navbar bg="light" expand="lg">
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="mr-auto" style={styles.mainView}>
-           
-            <Nav.Link style={styles.mainView} href="/login">Login</Nav.Link>
-            <Nav.Link style={styles.mainView}  href="/signup">Signup</Nav.Link>
-    
+          <Nav className="mr-auto">
+            <Nav.Link href="/home">Home</Nav.Link>
+            <Nav.Link href="/login">Login</Nav.Link>
+            <Nav.Link href="/list">List of Users</Nav.Link>
+            <Nav.Link href="/create">Add User</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Navbar>
@@ -40,7 +40,7 @@ function App() {
           <Route render ={()=> < Login />} path="/login" />
           <Route render ={()=> < List />} path="/list" />
           <Route render ={()=> < Edit />} path="/edit/:id" />
-          <Route render ={()=> < Create />} path="/signup" />
+          <Route render ={()=> < Create />} path="/create" />
           <Route render ={()=> < Show />} path="/show/:id" />
       </div>
 
@@ -52,13 +52,3 @@ function App() {
 
 //<Route render ={()=> < App />} path="/" />
 export default App;
-const styles = {
-  mainView: {
-    color:'white',
-    backgroundColor: '#ff5e6c',
-    paddingRight: '200',
-    textAlign:'center',
-   
-
-  }
-}

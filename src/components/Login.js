@@ -7,21 +7,21 @@ import axios from 'axios';
 //
 import View from './View'
 //
-function App(props) {
+function App() {
   //state variable for the screen, admin or user
   const [screen, setScreen] = useState('auth');
   //store input field data, user name and password
-  const [emailId, setEmailId] = useState();
+  const [username, setUsername] = useState();
   const [password, setPassword] = useState();
   const apiUrl = "http://localhost:3000/signin";
   //send username and password to the server
   // for initial authentication
   const auth = async () => {
     console.log('calling auth')
-    console.log(emailId)
+    console.log(username)
     try {
       //make a get request to /authenticate end-point on the server
-      const loginData = { auth: { emailId, password } }
+      const loginData = { auth: { username, password } }
       //call api
       const res = await axios.post(apiUrl, loginData);
       console.log(res.data.auth)
@@ -36,13 +36,7 @@ function App(props) {
     }
   
   };
-  const signup = async () => {
-    console.log('calling signup')
   
-    window.open('/signup')
-       
-  
-  };
   //check if the user already logged-in
   const readCookie = async () => {
     try {
@@ -65,54 +59,24 @@ function App(props) {
   }, []);
   //
   return (
-    <html style={styles.mainView}>
-     <br/> <br/>  <h3>Course Registration System</h3> <br/> <br/> <br/> <br/>
-    <div className="App" >
+    <div className="App">
       {screen === 'auth' 
-        ? <div >
-          <label>Email Id: </label>
+        ? <div>
+          <label>Username: </label>
           <br/>
-          <input type="text" onChange={e => setEmailId(e.target.value)} />
+          <input type="text" onChange={e => setUsername(e.target.value)} />
           <br/>
           <label>Password: </label>
           <br/>
           <input type="password" onChange={e => setPassword(e.target.value)} />
           <br/>
-          <button style={styles.button} onClick={auth}>Login</button>  
-          <br/> <br/> <br/>
-          <h6>Have not registered yet?</h6>
-          <button style={styles.button} onClick={signup}>Signup</button>
+          <button onClick={auth}>Login</button>
         </div>
         : <View screen={screen} setScreen={setScreen} />
       }
     </div>
-    </html>
   );
 }
 
 export default App;
 
-const styles = {
-  mainView: {
-    fontSize: 20,
- 
-    fontFamily: 'avenir-med',
-    textAlign: 'center',
-    backgroundColor: '#fff5d7',
-    position:'fixed',
-    padding:'50',
-  marginBottom:'150',
-  marginTop:'150',
-    paddingBottom:'100',
-
-    width: '100%',
-    height: '100%'
-  },
-  button: {
-    backgroundColor: ' #ff5e6c',
-    fontSize: 20,
-    fontFamily: 'avenir-med',
-
-    textAlign: 'center'
-  }
-}
