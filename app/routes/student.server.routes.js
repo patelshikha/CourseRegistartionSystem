@@ -5,7 +5,7 @@ var router = express.Router();
 // Define the routes module' method
 module.exports = function (app) {
   
-    app.get("/users",users.list); //go to http://localhost:3000/users to see the list
+    app.get("/allstudents",users.list); //go to http://localhost:3000/users to see the list
     //handle a post request made to root path
     app.post('/', users.create);
     //

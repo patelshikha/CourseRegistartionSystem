@@ -4,9 +4,7 @@ import Jumbotron from 'react-bootstrap/Jumbotron';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import axios from 'axios';
-//
-import View from './View'
-//
+import Details from './Details'
 function App(props) {
   //state variable for the screen, admin or user
   const [screen, setScreen] = useState('auth');
@@ -24,12 +22,16 @@ function App(props) {
       const loginData = { auth: { emailId, password } }
       //call api
       const res = await axios.post(apiUrl, loginData);
-      console.log(res.data.auth)
+      
+      console.log('response',res.data)
       console.log(res.data.screen)
       //process the response
       if (res.data.screen !== undefined) {
         setScreen(res.data.screen);
-        console.log(res.data.screen);
+        
+      }
+      else{
+        alert("Invalid email id or password!!");
       }
     } catch (e) { //print the error
       console.log(e);
@@ -38,10 +40,7 @@ function App(props) {
   };
   const signup = async () => {
     console.log('calling signup')
-  
     window.open('/signup')
-       
-  
   };
   //check if the user already logged-in
   const readCookie = async () => {
@@ -83,7 +82,7 @@ function App(props) {
           <h6>Have not registered yet?</h6>
           <button style={styles.button} onClick={signup}>Signup</button>
         </div>
-        : <View screen={screen} setScreen={setScreen} />
+        : <Details screen={screen} setScreen={setScreen} />
       }
     </div>
     </html>

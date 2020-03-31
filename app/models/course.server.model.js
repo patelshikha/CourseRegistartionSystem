@@ -35,12 +35,7 @@ ref: 'Student'
 
 
 
-// Configure the 'StudentSchema' to use getters and virtuals when transforming to JSON
-CourseSchema.set('toJSON', {
-	getters: true,
-	virtuals: true
-});
 
-
+})
 // Create the 'User' model out of the 'UserSchema'
 mongoose.model('Course', CourseSchema);

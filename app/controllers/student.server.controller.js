@@ -117,7 +117,7 @@ exports.authenticate = function(req, res, next) {
 	console.log(password)
 	console.log(emailId)
 	//find the user with given username using static method findOne
-	User.findOne({emailId: emailId}, (err, user) => {
+	User.findOne({email: emailId}, (err, user) => {
 			if (err) {
 				return next(err);
 			} else {
@@ -132,7 +132,7 @@ exports.authenticate = function(req, res, next) {
 				// set the cookie as the token string, with a similar max age as the token
 				// here, the max age is in milliseconds
 				res.cookie('token', token, { maxAge: jwtExpirySeconds * 1000,httpOnly: true});
-				res.status(200).send({ screen: 'user' });
+				res.status(200).send({ screen: 'user',userName:user.firstName,user:user });
 				//
 				//res.json({status:"success", message: "user found!!!", data:{user:
 				//user, token:token}});
